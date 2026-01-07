@@ -24,7 +24,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        if (!$token = Auth::attempt($request->only('email','password'))) {
+        if (!$token = auth('api')->attempt($request->only('email','password'))) {
             return response()->json([
                 'success' => false,
                 'message' => 'Login gagal'
