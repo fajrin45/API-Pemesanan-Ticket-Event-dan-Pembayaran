@@ -6,12 +6,18 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ActivityLog;
 
 class PaymentController extends Controller
 {
     // Buat pembayaran (simulasi)
     public function store(Request $request)
     {
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'activity' => 'Membuat pembayaran order ID ' . $request->order_id
+        ]);
+
         $request->validate([
             'order_id' => 'required',
             'amount' => 'required|numeric',
@@ -25,6 +31,7 @@ class PaymentController extends Controller
             'payment_method' => $request->payment_method,
             'status' => 'pending'
         ]);
+        
 
         return response()->json([
             'message' => 'Pembayaran berhasil dibuat',
