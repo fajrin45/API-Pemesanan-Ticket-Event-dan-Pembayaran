@@ -46,6 +46,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
+    use HasFactory, Notifiable;
+
+    protected $fillable = ['name','email','password','role'];
+
+    protected $hidden = ['password'];
+
+    // JWT wajib
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -55,4 +62,23 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    // Relasi ke Orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    // Relasi ke Payments
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    // Relasi ke ActivityLogs
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
 }
+
