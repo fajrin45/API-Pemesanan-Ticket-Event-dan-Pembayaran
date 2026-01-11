@@ -1,103 +1,5 @@
 # API Pemesanan Tiket Event dan Pembayaran
 
-<<<<<<< HEAD
-## Judul Proyek
-
-**API Pemesanan Tiket Event dan Pembayaran** merupakan layanan Web Service berbasis REST yang digunakan untuk mengelola data event, tiket, pemesanan, serta proses pembayaran secara online. Sistem ini menyediakan endpoint autentikasi pengguna menggunakan JWT, manajemen event dan tiket, pemesanan tiket, pencatatan pembayaran, serta log aktivitas.
-
-## Deskripsi Singkat
-
-API Pemesanan Tiket Event dan Pembayaran adalah sistem Web Service yang dikembangkan menggunakan Laravel Framework untuk menyediakan layanan pemesanan tiket event secara online. API ini menyediakan berbagai endpoint RESTful yang memungkinkan pengguna untuk:
-
-- **Autentikasi**: Register dan login menggunakan JWT (JSON Web Token)
-- **Manajemen Event**: CRUD data event (membuat, membaca, memperbarui, menghapus event)
-- **Manajemen Tiket**: CRUD tiket event dengan berbagai jenis dan harga
-- **Pemesanan Tiket**: Membuat pesanan tiket dan melihat riwayat pemesanan
-- **Pembayaran**: Pencatatan pembayaran dan update status pembayaran (pending, sukses, gagal)
-- **Log Aktivitas**: Pencatatan aktivitas penting seperti login dan transaksi
-
-API dikembangkan menggunakan standar RESTful dengan response JSON sehingga mudah diintegrasikan dengan berbagai aplikasi frontend.
-
-## Cara Menjalankan Sistem
-
-### Prasyarat
-- PHP >= 8.1
-- Composer
-- MySQL
-- Git
-
-### Langkah-langkah Instalasi
-
-1. **Clone Repository**
-   ```bash
-   git clone https://github.com/[username]/api-pemesanan-tiket-event.git
-   cd api-pemesanan-tiket-event
-   ```
-
-2. **Install Dependencies menggunakan Composer**
-   ```bash
-   composer install
-   ```
-
-3. **Konfigurasi File .env**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-   
-   Edit file `.env` dan sesuaikan konfigurasi database:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=nama_database_anda
-   DB_USERNAME=username_database
-   DB_PASSWORD=password_database
-   
-   JWT_SECRET=your-jwt-secret-key
-   ```
-
-4. **Jalankan Migration**
-   ```bash
-   php artisan migrate
-   ```
-
-5. **Jalankan Server**
-   ```bash
-   php artisan serve
-   ```
-   
-   Server akan berjalan di `http://localhost:8000`
-
-6. **Akses API**
-   Base URL API: `http://localhost:8000/api`
-
-## Informasi Akun Uji Coba
-
-Untuk keperluan pengujian, Anda dapat menggunakan akun berikut atau membuat akun baru melalui endpoint register:
-
-### Akun Admin
-- **Email**: admin@example.com
-- **Password**: password123
-- **Role**: admin
-
-### Akun User
-- **Email**: user@example.com
-- **Password**: password123
-- **Role**: user
-
-**Catatan**: Jika akun di atas belum tersedia, silakan buat akun baru melalui endpoint `/api/register` atau jalankan seeder:
-```bash
-php artisan db:seed
-```
-
-## Dokumentasi API
-
-Dokumentasi lengkap API dapat diakses melalui:
-
-- **Postman Collection**: Lihat folder `docs/postman/` untuk file collection dan environment
-- **Dokumentasi Endpoint**: Lihat file `docs/API_DOCUMENTATION.md` untuk detail lengkap semua endpoint
-=======
 **Dibuat oleh:** fajrin (Ketua)  
 **Mata Kuliah:** Pemrograman Web Service  
 **Tahun:** 2026
@@ -334,7 +236,6 @@ Dokumentasi lengkap sistem dapat diakses melalui:
 
 ### 📋 Postman Collection
 - **`docs/postman/`** - Folder berisi file collection dan environment untuk Postman
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 ### Endpoint Utama
 
@@ -367,11 +268,8 @@ Dokumentasi lengkap sistem dapat diakses melalui:
 - `DELETE /api/orders/{id}` - Hapus pesanan
 
 #### Pembayaran
-<<<<<<< HEAD
-=======
 - `GET /api/payments` - Mendapatkan daftar pembayaran user
 - `GET /api/payments/{id}` - Mendapatkan detail pembayaran
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 - `POST /api/payments` - Membuat pembayaran
 - `PUT /api/payments/{id}/status` - Update status pembayaran
 
@@ -379,16 +277,6 @@ Dokumentasi lengkap sistem dapat diakses melalui:
 - `GET /api/activity-logs` - Mendapatkan log aktivitas
 - `GET /api/activity-logs/{id}` - Mendapatkan detail log aktivitas
 
-<<<<<<< HEAD
-## Teknologi yang Digunakan
-
-- **Backend**: PHP (Laravel 10)
-- **Database**: MySQL
-- **Autentikasi**: JWT (tymon/jwt-auth)
-- **Format Data**: JSON
-- **API Testing**: Postman
-- **Version Control**: GitHub
-=======
 ## Frontend UI
 
 Aplikasi ini dilengkapi dengan **antarmuka pengguna (UI) modern** yang dapat diakses melalui browser di `http://localhost:8000`. UI terintegrasi langsung dengan API backend dan menyediakan pengalaman pengguna yang lengkap.
@@ -661,19 +549,10 @@ php artisan serve
 | **Admin** | GET | `/api/admin/dashboard` | ✅ + Admin | ❌ |
 
 **Total: 27 Endpoints**
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 ## Anggota Kelompok
 
 - **Ketua**: Fajrin (2301010194)
-<<<<<<< HEAD
-- **Anggota 1**: Riska shari septiani (2301010209)
-- **Anggota 2**: M. syahidding danuwarsi abdussamad (2301010187)
-
-## Lisensi
-
-Proyek ini dibuat untuk keperluan Ujian Akhir Semester (UAS) Mata Kuliah Pemrograman Web Service.
-=======
   - Desain arsitektur API
   - Autentikasi JWT & middleware
   - Integrasi pembayaran
@@ -706,4 +585,3 @@ Proyek ini dibuat untuk keperluan **Ujian Akhir Semester (UAS) Mata Kuliah Pemro
 ---
 
 **Dibuat dengan ❤️ oleh fajrin dan tim**
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)

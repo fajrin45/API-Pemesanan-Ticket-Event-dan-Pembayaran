@@ -5,13 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Tiket;
 use App\Models\Event;
-<<<<<<< HEAD
-use Illuminate\Http\Request;
-=======
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 class TiketController extends Controller
 {
@@ -55,15 +51,12 @@ class TiketController extends Controller
 
         $tiket = Tiket::create($request->all());
 
-<<<<<<< HEAD
-=======
         // Log aktivitas
         ActivityLog::create([
             'user_id' => Auth::id(),
             'activity' => 'Membuat tiket: ' . $tiket->jenis_tiket . ' untuk event ID ' . $tiket->event_id
         ]);
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         return response()->json([
             'success' => true,
             'message' => 'Tiket berhasil dibuat',
@@ -101,15 +94,12 @@ class TiketController extends Controller
 
         $tiket->update($validated);
 
-<<<<<<< HEAD
-=======
         // Log aktivitas
         ActivityLog::create([
             'user_id' => Auth::id(),
             'activity' => 'Memperbarui tiket ID ' . $tiket->id
         ]);
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         return response()->json([
             'success' => true,
             'message' => 'Tiket berhasil diperbarui',
@@ -123,10 +113,6 @@ class TiketController extends Controller
     public function destroy($id)
     {
         $tiket = Tiket::findOrFail($id);
-<<<<<<< HEAD
-        $tiket->delete();
-
-=======
         $tiketId = $tiket->id;
         $tiket->delete();
 
@@ -136,7 +122,6 @@ class TiketController extends Controller
             'activity' => 'Menghapus tiket ID ' . $tiketId
         ]);
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         return response()->json([
             'success' => true,
             'message' => 'Tiket berhasil dihapus'

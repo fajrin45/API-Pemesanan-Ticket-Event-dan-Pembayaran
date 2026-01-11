@@ -1,11 +1,8 @@
 # Dokumentasi API - API Pemesanan Tiket Event dan Pembayaran
 
-<<<<<<< HEAD
-=======
 **Dibuat oleh:** fajrin  
 **Tanggal:** 2026
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 ## Base URL
 ```
 http://localhost:8000/api
@@ -17,8 +14,6 @@ API menggunakan JWT (JSON Web Token) untuk autentikasi. Setelah login, sertakan 
 Authorization: Bearer {token}
 ```
 
-<<<<<<< HEAD
-=======
 ## Struktur Database
 
 ### Tabel Events
@@ -70,7 +65,6 @@ Authorization: Bearer {token}
 - `created_at` (timestamp)
 - `updated_at` (timestamp)
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 ---
 
 ## 1. Autentikasi
@@ -81,13 +75,8 @@ Authorization: Bearer {token}
 **Request Body:**
 ```json
 {
-<<<<<<< HEAD
-  "name": "John Doe",
-  "email": "john@example.com",
-=======
   "name": "fajrin",
   "email": "fajrin@example.com",
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
   "password": "password123"
 }
 ```
@@ -99,13 +88,8 @@ Authorization: Bearer {token}
   "message": "Register berhasil",
   "data": {
     "id": 1,
-<<<<<<< HEAD
-    "name": "John Doe",
-    "email": "john@example.com",
-=======
     "name": "fajrin",
     "email": "fajrin@example.com",
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     "role": "user",
     "created_at": "2026-01-10T10:00:00.000000Z",
     "updated_at": "2026-01-10T10:00:00.000000Z"
@@ -131,11 +115,7 @@ Authorization: Bearer {token}
 **Request Body:**
 ```json
 {
-<<<<<<< HEAD
-  "email": "john@example.com",
-=======
   "email": "fajrin@example.com",
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
   "password": "password123"
 }
 ```
@@ -148,13 +128,8 @@ Authorization: Bearer {token}
   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
   "user": {
     "id": 1,
-<<<<<<< HEAD
-    "name": "John Doe",
-    "email": "john@example.com",
-=======
     "name": "fajrin",
     "email": "fajrin@example.com",
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     "role": "user"
   }
 }
@@ -180,13 +155,8 @@ Authorization: Bearer {token}
   "success": true,
   "data": {
     "id": 1,
-<<<<<<< HEAD
-    "name": "John Doe",
-    "email": "john@example.com",
-=======
     "name": "fajrin",
     "email": "fajrin@example.com",
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     "role": "user",
     "created_at": "2026-01-10T10:00:00.000000Z",
     "updated_at": "2026-01-10T10:00:00.000000Z"
@@ -228,12 +198,8 @@ Authorization: Bearer {token}
 ## 2. Manajemen Event
 
 ### 2.1 Get List Events
-**Endpoint:** `GET /api/events`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `GET /api/events`
 **Authentication:** Tidak Diperlukan (Public)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Query Parameters:**
 - `lokasi` (optional): Filter berdasarkan lokasi
@@ -267,12 +233,8 @@ Authorization: Bearer {token}
 ---
 
 ### 2.2 Create Event
-**Endpoint:** `POST /api/events`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `POST /api/events`
 **Authentication:** Diperlukan (Bearer Token)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -304,12 +266,8 @@ Authorization: Bearer {token}
 ---
 
 ### 2.3 Get Event Detail
-**Endpoint:** `GET /api/events/{id}`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `GET /api/events/{id}`
 **Authentication:** Tidak Diperlukan (Public)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -339,12 +297,8 @@ Authorization: Bearer {token}
 ---
 
 ### 2.4 Update Event
-**Endpoint:** `PUT /api/events/{id}`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `PUT /api/events/{id}`
 **Authentication:** Diperlukan (Bearer Token)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -371,12 +325,8 @@ Authorization: Bearer {token}
 ---
 
 ### 2.5 Delete Event
-**Endpoint:** `DELETE /api/events/{id}`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `DELETE /api/events/{id}`
 **Authentication:** Diperlukan (Bearer Token)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -391,12 +341,8 @@ Authorization: Bearer {token}
 ## 3. Manajemen Tiket
 
 ### 3.1 Get List Tikets
-**Endpoint:** `GET /api/tikets`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `GET /api/tikets`
 **Authentication:** Tidak Diperlukan (Public)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Query Parameters:**
 - `event_id` (optional): Filter berdasarkan event_id
@@ -431,12 +377,8 @@ Authorization: Bearer {token}
 ---
 
 ### 3.2 Create Tiket
-**Endpoint:** `POST /api/tikets`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `POST /api/tikets`
 **Authentication:** Diperlukan (Bearer Token)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -468,12 +410,8 @@ Authorization: Bearer {token}
 ---
 
 ### 3.3 Get Tiket Detail
-**Endpoint:** `GET /api/tikets/{id}`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `GET /api/tikets/{id}`
 **Authentication:** Tidak Diperlukan (Public)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -495,12 +433,8 @@ Authorization: Bearer {token}
 ---
 
 ### 3.4 Update Tiket
-**Endpoint:** `PUT /api/tikets/{id}`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `PUT /api/tikets/{id}`
 **Authentication:** Diperlukan (Bearer Token)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -522,12 +456,8 @@ Authorization: Bearer {token}
 ---
 
 ### 3.5 Delete Tiket
-**Endpoint:** `DELETE /api/tikets/{id}`  
-<<<<<<< HEAD
-**Authentication:** Required
-=======
+**Endpoint:** `DELETE /api/tikets/{id}`
 **Authentication:** Diperlukan (Bearer Token)
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -677,9 +607,6 @@ Authorization: Bearer {token}
 
 ## 5. Pembayaran
 
-<<<<<<< HEAD
-### 5.1 Create Pembayaran
-=======
 ### 5.1 Get List Pembayaran
 **Endpoint:** `GET /api/payments`  
 **Authentication:** Required
@@ -745,7 +672,6 @@ Authorization: Bearer {token}
 ---
 
 ### 5.3 Create Pembayaran
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 **Endpoint:** `POST /api/payments`  
 **Authentication:** Required
 
@@ -777,11 +703,7 @@ Authorization: Bearer {token}
 
 ---
 
-<<<<<<< HEAD
-### 5.2 Update Status Pembayaran
-=======
 ### 5.4 Update Status Pembayaran
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 **Endpoint:** `PUT /api/payments/{id}/status`  
 **Authentication:** Required
 
@@ -837,13 +759,8 @@ Authorization: Bearer {token}
         "created_at": "2026-01-10T10:00:00.000000Z",
         "user": {
           "id": 1,
-<<<<<<< HEAD
-          "name": "John Doe",
-          "email": "john@example.com"
-=======
           "name": "fajrin",
           "email": "fajrin@example.com"
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         }
       }
     ]
@@ -924,8 +841,6 @@ Semua error response mengikuti format berikut:
 - `404` - Not Found
 - `422` - Validation Error
 - `500` - Internal Server Error
-<<<<<<< HEAD
-=======
 
 ---
 
@@ -964,4 +879,3 @@ Semua error response mengikuti format berikut:
 ---
 
 **Dokumentasi ini dibuat oleh fajrin untuk keperluan Ujian Akhir Semester (UAS) Mata Kuliah Pemrograman Web Service.**
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)

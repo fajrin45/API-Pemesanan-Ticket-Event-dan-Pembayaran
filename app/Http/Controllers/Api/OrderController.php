@@ -116,15 +116,12 @@ class OrderController extends Controller
 
         $order->update($validated);
 
-<<<<<<< HEAD
-=======
         // Log aktivitas
         ActivityLog::create([
             'user_id' => Auth::id(),
             'activity' => 'Memperbarui pesanan ID ' . $order->id . ' dengan status: ' . ($validated['status'] ?? $order->status)
         ]);
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         return response()->json([
             'success' => true,
             'message' => 'Pesanan berhasil diperbarui',
@@ -138,10 +135,7 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::where('user_id', Auth::id())->findOrFail($id);
-<<<<<<< HEAD
-=======
         $orderId = $order->id;
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
         // Kembalikan kuota jika belum cancelled
         if ($order->status !== 'cancelled') {
@@ -150,15 +144,12 @@ class OrderController extends Controller
 
         $order->delete();
 
-<<<<<<< HEAD
-=======
         // Log aktivitas
         ActivityLog::create([
             'user_id' => Auth::id(),
             'activity' => 'Menghapus pesanan ID ' . $orderId
         ]);
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         return response()->json([
             'success' => true,
             'message' => 'Pesanan berhasil dihapus'

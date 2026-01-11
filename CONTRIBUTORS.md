@@ -7,11 +7,8 @@
 - Desain arsitektur API
 - Autentikasi JWT & middleware
 - Integrasi pembayaran
-<<<<<<< HEAD
-=======
 - **Membuat UI Frontend (Single Page Application)**
 - **Penyesuaian code dan integrasi sistem**
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **File yang dikerjakan:**
 - `app/Http/Controllers/AuthController.php` - Autentikasi JWT (register, login, logout, refresh)
@@ -20,9 +17,6 @@
 - `app/Models/User.php` - Model User dengan JWT
 - `config/jwt.php` - Konfigurasi JWT
 - `routes/api.php` - Struktur routing API (arsitektur)
-<<<<<<< HEAD
-- `app/Http/Kernel.php` - Registrasi middleware
-=======
 - `routes/web.php` - Routing untuk SPA frontend
 - `app/Http/Kernel.php` - Registrasi middleware
 - `app/Exceptions/Handler.php` - Custom exception handler untuk API
@@ -33,7 +27,6 @@
 - `database/seeders/AdminSeeder.php` - Seeder untuk membuat admin user
 - `docs/CARA_MEMBUAT_ADMIN.md` - Dokumentasi cara membuat admin
 - Penyesuaian dan perbaikan code di berbagai controller dan middleware
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 ---
 
@@ -100,8 +93,6 @@ Detail perubahan:
 - Menambahkan validasi data di semua endpoint
 - Menambahkan relasi model Event dan Tiket
 ```
-<<<<<<< HEAD
-=======
 
 **Contoh untuk UI:**
 ```
@@ -128,4 +119,3 @@ Detail perubahan:
 ### Penyesuaian Code
 - **Dilakukan oleh**: Fajrin (Ketua)
 - **Fokus**: Integrasi frontend-backend, error handling, middleware, exception handling, route configuration
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)

@@ -106,11 +106,7 @@ class PaymentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pembayaran berhasil dibuat',
-<<<<<<< HEAD
-            'data' => $payment
-=======
             'data' => $payment->load(['order.tiket.event', 'user'])
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         ], 201);
     }
 

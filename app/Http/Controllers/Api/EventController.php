@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-<<<<<<< HEAD
-use Illuminate\Http\Request;
-=======
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 class EventController extends Controller
 {
@@ -52,12 +48,6 @@ class EventController extends Controller
 
         $event = Event::create($request->all());
 
-<<<<<<< HEAD
-        return response()->json([
-            'success' => true,
-            'message' => 'Event berhasil dibuat',
-            'data' => $event
-=======
         // Log aktivitas
         ActivityLog::create([
             'user_id' => Auth::id(),
@@ -68,7 +58,6 @@ class EventController extends Controller
             'success' => true,
             'message' => 'Event berhasil dibuat',
             'data' => $event->load('tikets')
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         ], 201);
     }
 
@@ -98,12 +87,6 @@ class EventController extends Controller
 
         $event->update($validated);
 
-<<<<<<< HEAD
-        return response()->json([
-            'success' => true,
-            'message' => 'Event berhasil diperbarui',
-            'data' => $event
-=======
         // Log aktivitas
         ActivityLog::create([
             'user_id' => Auth::id(),
@@ -114,7 +97,6 @@ class EventController extends Controller
             'success' => true,
             'message' => 'Event berhasil diperbarui',
             'data' => $event->load('tikets')
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         ]);
     }
 
@@ -122,10 +104,6 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
-<<<<<<< HEAD
-        $event->delete();
-
-=======
         $eventName = $event->nama_event;
         $event->delete();
 
@@ -135,7 +113,6 @@ class EventController extends Controller
             'activity' => 'Menghapus event: ' . $eventName
         ]);
 
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         return response()->json([
             'success' => true,
             'message' => 'Event berhasil dihapus (soft delete)'

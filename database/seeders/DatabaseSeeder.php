@@ -12,14 +12,10 @@ class DatabaseSeeder extends Seeder
      */
    public function run(): void
 {
-<<<<<<< HEAD
-    $this->call(EventSeeder::class);
-=======
     $this->call([
         AdminSeeder::class,
         EventSeeder::class,
     ]);
->>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 }
 
 }
