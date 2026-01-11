@@ -3,6 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -44,5 +48,55 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     */
+    public function render($request, Throwable $exception)
+    {
+        // Handle API requests
+        if ($request->is('api/*')) {
+            // Validation errors
+            if ($exception instanceof ValidationException) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validasi gagal',
+                    'errors' => $exception->errors()
+                ], 422);
+            }
+
+            // Model not found
+            if ($exception instanceof ModelNotFoundException) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan'
+                ], 404);
+            }
+
+            // Not found
+            if ($exception instanceof NotFoundHttpException) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Endpoint tidak ditemukan'
+                ], 404);
+            }
+
+            // Unauthorized
+            if ($exception instanceof UnauthorizedHttpException) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+
+            // Generic error
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage() ?: 'Terjadi kesalahan pada server'
+            ], 500);
+        }
+
+        return parent::render($request, $exception);
     }
 }

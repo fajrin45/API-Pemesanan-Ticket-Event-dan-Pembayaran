@@ -17,6 +17,17 @@ use App\Http\Controllers\Api\ActivityLogController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+<<<<<<< HEAD
+=======
+// Public endpoints untuk melihat Event (GET saja)
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+
+// Public endpoints untuk melihat Tiket (GET saja)
+Route::get('/tikets', [TiketController::class, 'index']);
+Route::get('/tikets/{id}', [TiketController::class, 'show']);
+
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 /*
 |--------------------------------------------------------------------------
 | Protected Routes (Membutuhkan Autentikasi JWT)
@@ -31,11 +42,23 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/refresh', [AuthController::class, 'refresh']);
     });
 
+<<<<<<< HEAD
     // Manajemen Event
     Route::apiResource('events', EventController::class);
     
     // Manajemen Tiket
     Route::apiResource('tikets', TiketController::class);
+=======
+    // Manajemen Event (POST, PUT, DELETE - membutuhkan auth)
+    Route::post('/events', [EventController::class, 'store']);
+    Route::put('/events/{id}', [EventController::class, 'update']);
+    Route::delete('/events/{id}', [EventController::class, 'destroy']);
+    
+    // Manajemen Tiket (POST, PUT, DELETE - membutuhkan auth)
+    Route::post('/tikets', [TiketController::class, 'store']);
+    Route::put('/tikets/{id}', [TiketController::class, 'update']);
+    Route::delete('/tikets/{id}', [TiketController::class, 'destroy']);
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     
     // Pemesanan Tiket
     Route::prefix('orders')->group(function () {
@@ -48,7 +71,13 @@ Route::middleware('auth:api')->group(function () {
     
     // Pembayaran
     Route::prefix('payments')->group(function () {
+<<<<<<< HEAD
         Route::post('/', [PaymentController::class, 'store']); // Buat pembayaran
+=======
+        Route::get('/', [PaymentController::class, 'index']); // List pembayaran
+        Route::post('/', [PaymentController::class, 'store']); // Buat pembayaran
+        Route::get('/{id}', [PaymentController::class, 'show']); // Detail pembayaran
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         Route::put('/{id}/status', [PaymentController::class, 'updateStatus']); // Update status pembayaran
     });
     

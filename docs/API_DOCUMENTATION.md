@@ -1,5 +1,11 @@
 # Dokumentasi API - API Pemesanan Tiket Event dan Pembayaran
 
+<<<<<<< HEAD
+=======
+**Dibuat oleh:** fajrin  
+**Tanggal:** 2026
+
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 ## Base URL
 ```
 http://localhost:8000/api
@@ -11,6 +17,60 @@ API menggunakan JWT (JSON Web Token) untuk autentikasi. Setelah login, sertakan 
 Authorization: Bearer {token}
 ```
 
+<<<<<<< HEAD
+=======
+## Struktur Database
+
+### Tabel Events
+- `id` (bigint, primary key)
+- `nama_event` (string)
+- `deskripsi` (text)
+- `tanggal_event` (datetime)
+- `lokasi` (string)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+- `deleted_at` (timestamp, nullable) - Soft delete
+
+### Tabel Tikets
+- `id` (bigint, primary key)
+- `event_id` (bigint, foreign key ke events)
+- `jenis_tiket` (string) - VIP, Regular, Early Bird, dll
+- `harga` (decimal 12,2)
+- `kuota` (integer)
+- `terjual` (integer, default: 0)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+### Tabel Orders
+- `id` (bigint, primary key)
+- `user_id` (bigint, foreign key ke users)
+- `tiket_id` (bigint, foreign key ke tikets)
+- `jumlah_tiket` (integer)
+- `total_harga` (decimal 12,2)
+- `status` (enum: 'pending', 'confirmed', 'cancelled', default: 'pending')
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+### Tabel Payments
+- `id` (bigint, primary key)
+- `user_id` (bigint, foreign key ke users)
+- `order_id` (bigint, foreign key ke orders)
+- `amount` (decimal 12,2)
+- `status` (enum: 'pending', 'sukses', 'gagal', default: 'pending')
+- `payment_method` (string, nullable)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+### Tabel Users
+- `id` (bigint, primary key)
+- `name` (string)
+- `email` (string, unique)
+- `password` (string, hashed)
+- `role` (enum: 'user', 'admin', default: 'user')
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 ---
 
 ## 1. Autentikasi
@@ -21,8 +81,13 @@ Authorization: Bearer {token}
 **Request Body:**
 ```json
 {
+<<<<<<< HEAD
   "name": "John Doe",
   "email": "john@example.com",
+=======
+  "name": "fajrin",
+  "email": "fajrin@example.com",
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
   "password": "password123"
 }
 ```
@@ -34,8 +99,13 @@ Authorization: Bearer {token}
   "message": "Register berhasil",
   "data": {
     "id": 1,
+<<<<<<< HEAD
     "name": "John Doe",
     "email": "john@example.com",
+=======
+    "name": "fajrin",
+    "email": "fajrin@example.com",
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     "role": "user",
     "created_at": "2026-01-10T10:00:00.000000Z",
     "updated_at": "2026-01-10T10:00:00.000000Z"
@@ -61,7 +131,11 @@ Authorization: Bearer {token}
 **Request Body:**
 ```json
 {
+<<<<<<< HEAD
   "email": "john@example.com",
+=======
+  "email": "fajrin@example.com",
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
   "password": "password123"
 }
 ```
@@ -74,8 +148,13 @@ Authorization: Bearer {token}
   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
   "user": {
     "id": 1,
+<<<<<<< HEAD
     "name": "John Doe",
     "email": "john@example.com",
+=======
+    "name": "fajrin",
+    "email": "fajrin@example.com",
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     "role": "user"
   }
 }
@@ -101,8 +180,13 @@ Authorization: Bearer {token}
   "success": true,
   "data": {
     "id": 1,
+<<<<<<< HEAD
     "name": "John Doe",
     "email": "john@example.com",
+=======
+    "name": "fajrin",
+    "email": "fajrin@example.com",
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
     "role": "user",
     "created_at": "2026-01-10T10:00:00.000000Z",
     "updated_at": "2026-01-10T10:00:00.000000Z"
@@ -145,7 +229,11 @@ Authorization: Bearer {token}
 
 ### 2.1 Get List Events
 **Endpoint:** `GET /api/events`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Tidak Diperlukan (Public)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Query Parameters:**
 - `lokasi` (optional): Filter berdasarkan lokasi
@@ -180,7 +268,11 @@ Authorization: Bearer {token}
 
 ### 2.2 Create Event
 **Endpoint:** `POST /api/events`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Diperlukan (Bearer Token)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -213,7 +305,11 @@ Authorization: Bearer {token}
 
 ### 2.3 Get Event Detail
 **Endpoint:** `GET /api/events/{id}`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Tidak Diperlukan (Public)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -244,7 +340,11 @@ Authorization: Bearer {token}
 
 ### 2.4 Update Event
 **Endpoint:** `PUT /api/events/{id}`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Diperlukan (Bearer Token)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -272,7 +372,11 @@ Authorization: Bearer {token}
 
 ### 2.5 Delete Event
 **Endpoint:** `DELETE /api/events/{id}`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Diperlukan (Bearer Token)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -288,7 +392,11 @@ Authorization: Bearer {token}
 
 ### 3.1 Get List Tikets
 **Endpoint:** `GET /api/tikets`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Tidak Diperlukan (Public)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Query Parameters:**
 - `event_id` (optional): Filter berdasarkan event_id
@@ -324,7 +432,11 @@ Authorization: Bearer {token}
 
 ### 3.2 Create Tiket
 **Endpoint:** `POST /api/tikets`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Diperlukan (Bearer Token)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -357,7 +469,11 @@ Authorization: Bearer {token}
 
 ### 3.3 Get Tiket Detail
 **Endpoint:** `GET /api/tikets/{id}`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Tidak Diperlukan (Public)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -380,7 +496,11 @@ Authorization: Bearer {token}
 
 ### 3.4 Update Tiket
 **Endpoint:** `PUT /api/tikets/{id}`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Diperlukan (Bearer Token)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Request Body:**
 ```json
@@ -403,7 +523,11 @@ Authorization: Bearer {token}
 
 ### 3.5 Delete Tiket
 **Endpoint:** `DELETE /api/tikets/{id}`  
+<<<<<<< HEAD
 **Authentication:** Required
+=======
+**Authentication:** Diperlukan (Bearer Token)
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **Response Success (200):**
 ```json
@@ -553,7 +677,75 @@ Authorization: Bearer {token}
 
 ## 5. Pembayaran
 
+<<<<<<< HEAD
 ### 5.1 Create Pembayaran
+=======
+### 5.1 Get List Pembayaran
+**Endpoint:** `GET /api/payments`  
+**Authentication:** Required
+
+**Query Parameters:**
+- `status` (optional): Filter berdasarkan status (pending, sukses, gagal)
+- `order_id` (optional): Filter berdasarkan order_id
+
+**Response Success (200):**
+```json
+{
+  "success": true,
+  "message": "Data pembayaran berhasil diambil",
+  "data": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 1,
+        "user_id": 1,
+        "order_id": 1,
+        "amount": "1000000.00",
+        "status": "pending",
+        "payment_method": "Bank Transfer",
+        "created_at": "2026-01-10T10:00:00.000000Z",
+        "order": {
+          "id": 1,
+          "total_harga": "1000000.00",
+          "tiket": {...},
+          "event": {...}
+        },
+        "user": {...}
+      }
+    ]
+  }
+}
+```
+
+---
+
+### 5.2 Get Detail Pembayaran
+**Endpoint:** `GET /api/payments/{id}`  
+**Authentication:** Required
+
+**Response Success (200):**
+```json
+{
+  "success": true,
+  "message": "Detail pembayaran",
+  "data": {
+    "id": 1,
+    "user_id": 1,
+    "order_id": 1,
+    "amount": "1000000.00",
+    "status": "pending",
+    "payment_method": "Bank Transfer",
+    "created_at": "2026-01-10T10:00:00.000000Z",
+    "order": {...},
+    "user": {...}
+  }
+}
+```
+
+---
+
+### 5.3 Create Pembayaran
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 **Endpoint:** `POST /api/payments`  
 **Authentication:** Required
 
@@ -585,7 +777,11 @@ Authorization: Bearer {token}
 
 ---
 
+<<<<<<< HEAD
 ### 5.2 Update Status Pembayaran
+=======
+### 5.4 Update Status Pembayaran
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 **Endpoint:** `PUT /api/payments/{id}/status`  
 **Authentication:** Required
 
@@ -641,8 +837,13 @@ Authorization: Bearer {token}
         "created_at": "2026-01-10T10:00:00.000000Z",
         "user": {
           "id": 1,
+<<<<<<< HEAD
           "name": "John Doe",
           "email": "john@example.com"
+=======
+          "name": "fajrin",
+          "email": "fajrin@example.com"
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         }
       }
     ]
@@ -723,3 +924,44 @@ Semua error response mengikuti format berikut:
 - `404` - Not Found
 - `422` - Validation Error
 - `500` - Internal Server Error
+<<<<<<< HEAD
+=======
+
+---
+
+## Catatan Penting
+
+### Relasi Database
+
+1. **Events → Tikets**: One to Many (satu event bisa punya banyak tiket)
+2. **Tikets → Orders**: One to Many (satu tiket bisa dipesan banyak kali)
+3. **Users → Orders**: One to Many (satu user bisa punya banyak order)
+4. **Orders → Payments**: One to One (satu order punya satu payment)
+5. **Users → Payments**: One to Many (satu user bisa punya banyak payment)
+
+### Validasi Penting
+
+- **Order**: 
+  - `jumlah_tiket` harus <= sisa kuota tiket
+  - `total_harga` = `harga tiket` × `jumlah_tiket`
+  
+- **Payment**:
+  - `amount` harus sama dengan `total_harga` dari order
+  - Order harus status `pending` dan belum punya payment
+  - Order harus milik user yang login
+
+- **Tiket**:
+  - `harga` harus >= 0
+  - `kuota` harus >= 1
+  - `terjual` tidak bisa lebih besar dari `kuota`
+
+### Soft Delete
+
+- Event menggunakan **soft delete**, artinya data tidak benar-benar dihapus dari database
+- Data yang di-soft delete masih ada di database dengan `deleted_at` terisi
+- Untuk melihat data yang sudah dihapus, perlu query khusus
+
+---
+
+**Dokumentasi ini dibuat oleh fajrin untuk keperluan Ujian Akhir Semester (UAS) Mata Kuliah Pemrograman Web Service.**
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)

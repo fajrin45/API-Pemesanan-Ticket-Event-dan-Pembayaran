@@ -7,6 +7,11 @@
 - Desain arsitektur API
 - Autentikasi JWT & middleware
 - Integrasi pembayaran
+<<<<<<< HEAD
+=======
+- **Membuat UI Frontend (Single Page Application)**
+- **Penyesuaian code dan integrasi sistem**
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 **File yang dikerjakan:**
 - `app/Http/Controllers/AuthController.php` - Autentikasi JWT (register, login, logout, refresh)
@@ -15,7 +20,20 @@
 - `app/Models/User.php` - Model User dengan JWT
 - `config/jwt.php` - Konfigurasi JWT
 - `routes/api.php` - Struktur routing API (arsitektur)
+<<<<<<< HEAD
 - `app/Http/Kernel.php` - Registrasi middleware
+=======
+- `routes/web.php` - Routing untuk SPA frontend
+- `app/Http/Kernel.php` - Registrasi middleware
+- `app/Exceptions/Handler.php` - Custom exception handler untuk API
+- `app/Http/Middleware/Authenticate.php` - Middleware autentikasi dengan JSON response
+- **`public/index.html`** - Struktur HTML untuk Single Page Application
+- **`public/app.js`** - JavaScript untuk frontend (routing, API calls, state management)
+- **`public/styles.css`** - Styling untuk UI
+- `database/seeders/AdminSeeder.php` - Seeder untuk membuat admin user
+- `docs/CARA_MEMBUAT_ADMIN.md` - Dokumentasi cara membuat admin
+- Penyesuaian dan perbaikan code di berbagai controller dan middleware
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
 
 ---
 
@@ -82,3 +100,32 @@ Detail perubahan:
 - Menambahkan validasi data di semua endpoint
 - Menambahkan relasi model Event dan Tiket
 ```
+<<<<<<< HEAD
+=======
+
+**Contoh untuk UI:**
+```
+[Fajrin] Implementasi UI Frontend dan penyesuaian code
+
+- Membuat Single Page Application (SPA) dengan HTML, CSS, JavaScript
+- Implementasi routing client-side
+- Integrasi frontend dengan API backend
+- Menambahkan fitur admin untuk membuat event dan tiket
+- Perbaikan error handling dan validasi di frontend
+- Penyesuaian middleware dan exception handler
+```
+
+---
+
+## Catatan Tambahan
+
+### Frontend UI
+- **Dibuat oleh**: Fajrin (Ketua)
+- **Teknologi**: HTML5, CSS3, Vanilla JavaScript (SPA)
+- **Fitur**: Login/Register, Event listing, Order management, Payment processing, Profile, Admin panel
+- **File utama**: `public/index.html`, `public/app.js`, `public/styles.css`
+
+### Penyesuaian Code
+- **Dilakukan oleh**: Fajrin (Ketua)
+- **Fokus**: Integrasi frontend-backend, error handling, middleware, exception handling, route configuration
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Tiket Event</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-ticket-alt"></i>
+                <span>EventTicket</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#" class="nav-link" data-page="home">Beranda</a>
+                <a href="#" class="nav-link" data-page="events">Event</a>
+                <a href="#" class="nav-link" data-page="orders" id="ordersLink" style="display: none;">Pesanan</a>
+                <a href="#" class="nav-link" data-page="payments" id="paymentsLink" style="display: none;">Pembayaran</a>
+                <a href="#" class="nav-link" data-page="profile" id="profileLink" style="display: none;">Profil</a>
+                <div class="nav-auth" id="navAuth">
+                    <a href="#" class="btn btn-outline" data-page="login">Masuk</a>
+                    <a href="#" class="btn btn-primary" data-page="register">Daftar</a>
+                </div>
+                <div class="nav-user" id="navUser" style="display: none;">
+                    <span class="user-name" id="userName"></span>
+                    <button class="btn btn-outline" id="logoutBtn">Keluar</button>
+                </div>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Home Page -->
+        <section class="page" id="homePage">
+            <div class="hero">
+                <div class="container">
+                    <h1 class="hero-title">Temukan Event Terbaik</h1>
+                    <p class="hero-subtitle">Pesan tiket event favoritmu dengan mudah dan cepat</p>
+                    <a href="#" class="btn btn-primary btn-lg" data-page="events">Jelajahi Event</a>
+                </div>
+            </div>
+            <div class="container">
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Aman & Terpercaya</h3>
+                        <p>Transaksi aman dengan sistem pembayaran terpercaya</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Mudah & Cepat</h3>
+                        <p>Proses pemesanan yang mudah dan cepat</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Tim support siap membantu kapan saja</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section class="page" id="loginPage" style="display: none;">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Masuk ke Akun</h2>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="loginEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="loginPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                        </form>
+                        <p class="auth-switch">Belum punya akun? <a href="#" data-page="register">Daftar sekarang</a></p>
+                        <div class="alert" id="loginAlert" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Page -->
+        <section class="page" id="registerPage" style="display: none;">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Daftar Akun Baru</h2>
+                        <form id="registerForm">
+                            <div class="form-group">
+                                <label>Nama Lengkap</label>
+                                <input type="text" id="registerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="registerEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="registerPassword" required minlength="6">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+                        </form>
+                        <p class="auth-switch">Sudah punya akun? <a href="#" data-page="login">Masuk</a></p>
+                        <div class="alert" id="registerAlert" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Page -->
+        <section class="page" id="eventsPage" style="display: none;">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Daftar Event</h2>
+                    <div class="page-actions">
+                        <input type="text" class="search-input" id="eventSearch" placeholder="Cari event...">
+                        <select class="filter-select" id="locationFilter">
+                            <option value="">Semua Lokasi</option>
+                        </select>
+                        <button class="btn btn-primary" id="createEventBtn" style="display: none;">
+                            <i class="fas fa-plus"></i> Buat Event
+                        </button>
+                    </div>
+                </div>
+                <div class="events-grid" id="eventsGrid">
+                    <div class="loading">Memuat event...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Detail Page -->
+        <section class="page" id="eventDetailPage" style="display: none;">
+            <div class="container">
+                <button class="btn btn-outline" id="backToEvents">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+                <div id="eventDetailContent">
+                    <div class="loading">Memuat detail event...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Orders Page -->
+        <section class="page" id="ordersPage" style="display: none;">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Riwayat Pemesanan</h2>
+                    <select class="filter-select" id="orderStatusFilter">
+                        <option value="">Semua Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="orders-list" id="ordersList">
+                    <div class="loading">Memuat pesanan...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Detail Page -->
+        <section class="page" id="orderDetailPage" style="display: none;">
+            <div class="container">
+                <button class="btn btn-outline" id="backToOrders">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+                <div id="orderDetailContent">
+                    <div class="loading">Memuat detail pesanan...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payments Page -->
+        <section class="page" id="paymentsPage" style="display: none;">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Riwayat Pembayaran</h2>
+                    <div class="page-actions">
+                        <select class="filter-select" id="paymentStatusFilter">
+                            <option value="">Semua Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="sukses">Sukses</option>
+                            <option value="gagal">Gagal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="payments-list" id="paymentsList">
+                    <div class="loading">Memuat pembayaran...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Detail Page -->
+        <section class="page" id="paymentDetailPage" style="display: none;">
+            <div class="container">
+                <button class="btn btn-outline" id="backToPayments">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+                <div id="paymentDetailContent">
+                    <div class="loading">Memuat detail pembayaran...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Page -->
+        <section class="page" id="profilePage" style="display: none;">
+            <div class="container">
+                <div class="profile-container">
+                    <div class="profile-card">
+                        <h2>Profil Saya</h2>
+                        <div id="profileContent">
+                            <div class="loading">Memuat profil...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Create/Edit Event -->
+    <div class="modal" id="eventModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Buat Event Baru</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="eventForm">
+                <input type="hidden" id="eventId">
+                <div class="form-group">
+                    <label>Nama Event</label>
+                    <input type="text" id="eventName" required>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="eventDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Event</label>
+                    <input type="datetime-local" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Lokasi</label>
+                    <input type="text" id="eventLocation" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelEventBtn">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Create Ticket -->
+    <div class="modal" id="ticketModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tambah Tiket</h3>
+                <button class="modal-close" id="closeTicketModal">&times;</button>
+            </div>
+            <form id="ticketForm">
+                <input type="hidden" id="ticketEventId">
+                <div class="form-group">
+                    <label>Jenis Tiket</label>
+                    <input type="text" id="ticketType" required placeholder="VIP, Regular, dll">
+                </div>
+                <div class="form-group">
+                    <label>Harga</label>
+                    <input type="number" id="ticketPrice" required min="0">
+                </div>
+                <div class="form-group">
+                    <label>Kuota</label>
+                    <input type="number" id="ticketQuota" required min="1">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelTicketBtn">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Order -->
+    <div class="modal" id="orderModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pesan Tiket</h3>
+                <button class="modal-close" id="closeOrderModal">&times;</button>
+            </div>
+            <form id="orderForm">
+                <input type="hidden" id="orderTicketId">
+                <div class="form-group">
+                    <label>Jenis Tiket</label>
+                    <input type="text" id="orderTicketType" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Harga per Tiket</label>
+                    <input type="text" id="orderTicketPrice" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Sisa Kuota</label>
+                    <input type="text" id="orderTicketQuota" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Jumlah Tiket</label>
+                    <input type="number" id="orderQuantity" required min="1">
+                </div>
+                <div class="form-group">
+                    <label>Total Harga</label>
+                    <input type="text" id="orderTotal" readonly>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelOrderBtn">Batal</button>
+                    <button type="submit" class="btn btn-primary">Pesan Sekarang</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Payment -->
+    <div class="modal" id="paymentModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pembayaran</h3>
+                <button class="modal-close" id="closePaymentModal">&times;</button>
+            </div>
+            <form id="paymentForm">
+                <input type="hidden" id="paymentOrderId">
+                <div class="form-group">
+                    <label>Total Pembayaran</label>
+                    <input type="text" id="paymentAmount" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Metode Pembayaran</label>
+                    <select id="paymentMethod" required>
+                        <option value="">Pilih Metode</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="E-Wallet">E-Wallet</option>
+                        <option value="Credit Card">Credit Card</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelPaymentBtn">Batal</button>
+                    <button type="submit" class="btn btn-primary">Bayar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

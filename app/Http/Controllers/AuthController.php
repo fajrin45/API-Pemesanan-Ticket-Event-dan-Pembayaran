@@ -23,6 +23,12 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
+        // Log aktivitas
+        ActivityLog::create([
+            'user_id' => $user->id,
+            'activity' => 'User baru mendaftar'
+        ]);
+
         return response()->json([
             'success' => true,
             'message' => 'Register berhasil',
@@ -73,6 +79,16 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        $user = auth('api')->user();
+        
+        // Log aktivitas
+        if ($user) {
+            ActivityLog::create([
+                'user_id' => $user->id,
+                'activity' => 'User logout'
+            ]);
+        }
+
         auth('api')->logout();
 
         return response()->json([

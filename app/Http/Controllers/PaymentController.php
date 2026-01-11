@@ -10,7 +10,52 @@ use App\Models\ActivityLog;
 
 class PaymentController extends Controller
 {
-    // Buat pembayaran (simulasi)
+    /**
+     * Display a listing of payments.
+     */
+    public function index(Request $request)
+    {
+        $query = Payment::with(['order.tiket.event', 'user'])
+            ->where('user_id', Auth::id());
+
+        // Filter by status
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Filter by order_id
+        if ($request->has('order_id')) {
+            $query->where('order_id', $request->order_id);
+        }
+
+        $payments = $query->orderBy('created_at', 'desc')->paginate(10);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data pembayaran berhasil diambil',
+            'data' => $payments
+        ]);
+    }
+
+    /**
+     * Display the specified payment.
+     */
+    public function show($id)
+    {
+        $payment = Payment::with(['order.tiket.event', 'user'])
+            ->where('user_id', Auth::id())
+            ->findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail pembayaran',
+            'data' => $payment
+        ]);
+    }
+
+    /**
+     * Store a newly created payment.
+     */
     public function store(Request $request)
     {
         ActivityLog::create([
@@ -24,6 +69,31 @@ class PaymentController extends Controller
             'payment_method' => 'required|string|max:255'
         ]);
 
+        // Cek apakah order milik user yang login
+        $order = Order::findOrFail($request->order_id);
+        if ($order->user_id !== Auth::id()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak memiliki akses ke order ini'
+            ], 403);
+        }
+
+        // Cek apakah order sudah memiliki payment
+        if ($order->payment) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Order ini sudah memiliki pembayaran'
+            ], 400);
+        }
+
+        // Validasi amount harus sama dengan total_harga order
+        if (abs($request->amount - $order->total_harga) > 0.01) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Jumlah pembayaran harus sama dengan total harga order'
+            ], 400);
+        }
+
         $payment = Payment::create([
             'user_id' => Auth::id(),
             'order_id' => $request->order_id,
@@ -36,11 +106,17 @@ class PaymentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pembayaran berhasil dibuat',
+<<<<<<< HEAD
             'data' => $payment
+=======
+            'data' => $payment->load(['order.tiket.event', 'user'])
+>>>>>>> 6550547 (membuat ui frontend,penyesuaian code dan integrasi sistem)
         ], 201);
     }
 
-    // Update status pembayaran
+    /**
+     * Update the payment status.
+     */
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -48,6 +124,15 @@ class PaymentController extends Controller
         ]);
 
         $payment = Payment::findOrFail($id);
+
+        // Cek apakah payment milik user yang login (kecuali admin)
+        if (Auth::user()->role !== 'admin' && $payment->user_id !== Auth::id()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak memiliki akses ke pembayaran ini'
+            ], 403);
+        }
+
         $payment->update(['status' => $request->status]);
 
         // Update status order jika pembayaran sukses
