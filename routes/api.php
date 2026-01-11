@@ -4,15 +4,71 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\TiketController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ActivityLogController;
 
+/*
+|--------------------------------------------------------------------------
+| Public Routes (Tanpa Autentikasi)
+|--------------------------------------------------------------------------
+*/
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+/*
+|--------------------------------------------------------------------------
+| Protected Routes (Membutuhkan Autentikasi JWT)
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth:api')->group(function () {
-    Route::get('/profile', [AuthController::class, 'profile']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-
-    Route::post('/payments', [PaymentController::class, 'store']);
-    Route::put('/payments/{id}/status', [PaymentController::class, 'updateStatus']);
     
+    // Autentikasi & Profil User
+    Route::prefix('auth')->group(function () {
+        Route::get('/profile', [AuthController::class, 'profile']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/refresh', [AuthController::class, 'refresh']);
+    });
+
+    // Manajemen Event
+    Route::apiResource('events', EventController::class);
+    
+    // Manajemen Tiket
+    Route::apiResource('tikets', TiketController::class);
+    
+    // Pemesanan Tiket
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index']); // Riwayat pemesanan
+        Route::post('/', [OrderController::class, 'store']); // Buat pesanan
+        Route::get('/{id}', [OrderController::class, 'show']); // Detail pesanan
+        Route::put('/{id}', [OrderController::class, 'update']); // Update pesanan
+        Route::delete('/{id}', [OrderController::class, 'destroy']); // Hapus pesanan
+    });
+    
+    // Pembayaran
+    Route::prefix('payments')->group(function () {
+        Route::post('/', [PaymentController::class, 'store']); // Buat pembayaran
+        Route::put('/{id}/status', [PaymentController::class, 'updateStatus']); // Update status pembayaran
+    });
+    
+    // Log Aktivitas
+    Route::prefix('activity-logs')->group(function () {
+        Route::get('/', [ActivityLogController::class, 'index']); // List log aktivitas
+        Route::get('/{id}', [ActivityLogController::class, 'show']); // Detail log aktivitas
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes (Membutuhkan Autentikasi JWT + Role Admin)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth:api', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return response()->json([
+            'success' => true,
+            'message' => 'Selamat datang Admin'
+        ]);
+    });
 });

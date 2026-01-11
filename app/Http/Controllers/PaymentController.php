@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Payment;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ActivityLog;
@@ -19,9 +19,9 @@ class PaymentController extends Controller
         ]);
 
         $request->validate([
-            'order_id' => 'required',
-            'amount' => 'required|numeric',
-            'payment_method' => 'required'
+            'order_id' => 'required|exists:orders,id',
+            'amount' => 'required|numeric|min:0',
+            'payment_method' => 'required|string|max:255'
         ]);
 
         $payment = Payment::create([
@@ -34,9 +34,10 @@ class PaymentController extends Controller
         
 
         return response()->json([
+            'success' => true,
             'message' => 'Pembayaran berhasil dibuat',
             'data' => $payment
-        ]);
+        ], 201);
     }
 
     // Update status pembayaran
@@ -49,9 +50,20 @@ class PaymentController extends Controller
         $payment = Payment::findOrFail($id);
         $payment->update(['status' => $request->status]);
 
+        // Update status order jika pembayaran sukses
+        if ($request->status === 'sukses' && $payment->order) {
+            $payment->order->update(['status' => 'confirmed']);
+            
+            ActivityLog::create([
+                'user_id' => Auth::id(),
+                'activity' => 'Pembayaran sukses untuk order ID ' . $payment->order_id
+            ]);
+        }
+
         return response()->json([
+            'success' => true,
             'message' => 'Status pembayaran diperbarui',
-            'data' => $payment
+            'data' => $payment->load('order')
         ]);
     }
 }

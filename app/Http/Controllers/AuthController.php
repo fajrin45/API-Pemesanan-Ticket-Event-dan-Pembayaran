@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\ActivityLog;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -79,5 +79,23 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Logout berhasil'
         ]);
+    }
+
+    public function refresh()
+    {
+        try {
+            $token = JWTAuth::refresh(JWTAuth::getToken());
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Token berhasil di-refresh',
+                'token' => $token
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Token tidak dapat di-refresh'
+            ], 401);
+        }
     }
 }

@@ -14,4 +14,20 @@ class Payment extends Model
         'status',
         'payment_method'
     ];
+
+    protected $casts = [
+        'amount' => 'decimal:2',
+    ];
+
+    // Relasi ke User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Relasi ke Order
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
 }
